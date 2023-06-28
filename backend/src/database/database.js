@@ -5,7 +5,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 export const startConnection = async () => {
   try {
-    const db = await connect(`${process.env.MONGO_URI}/${process.env.MONGO_DBNAME}`);
+    const db = await connect(`${process.env.MONGO_URI}`);
     console.log(db.connection.name);
   } catch (error) {
     console.error(`Error: ${error.message}`);
