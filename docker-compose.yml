@@ -1,0 +1,45 @@
+version: "3"
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - database
+    environment:
+      - MONGO_URI=mongodb://database:27017/veterinaria
+      - FRONT_URL=http://localhost:5000
+      - JWT_SECRET=TWEETYBOY
+      - EMAIL_HOST=smtp.mailtrap.io
+      - EMAIL_PORT=
+      - EMAIL_USER=
+      - EMAIL_PASS=
+    networks:
+      - apv_network
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: dockerfile
+    ports:
+      - "5000:5000"
+    depends_on:
+      - backend
+    environment:
+      - VITE_BACKEND_URL= http://localhost:3000
+    networks:
+      - apv_network
+  database:
+    image: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - apv_network
+    volumes:
+      - mongo-data:/data/db
+volumes:
+  mongo-data:
+networks:
+  apv_network:
+    name: apv_network
