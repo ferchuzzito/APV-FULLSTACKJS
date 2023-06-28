@@ -1,0 +1,15 @@
+# Archivos y directorios específicos de Backend
+backend/node_modules
+backend/.env
+
+# Archivos y directorios específicos de Frontend
+frontend/node_modules
+frontend/.env
+# frontend/dist
+
+# Otros archivos y directorios generales que no son necesarios en el contenedor
+node_modules
+.dockerignore
+.git
+.gitignore
+README.md
