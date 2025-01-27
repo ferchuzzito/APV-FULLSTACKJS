@@ -1,5 +1,5 @@
 # Utiliza una imagen base de Node.js
-FROM node:16-alpine
+FROM node:18-alpine
 
 # Establece el directorio de trabajo en la imagen
 WORKDIR /app/backend
@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 3000
 
 # Define el comando para iniciar el backend
-CMD [ "npm", "start" ]
+CMD [ "npm", "run", "dev" ]
