@@ -4,54 +4,46 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
+    #volumes: 
+    # - ./backend:/app/backend # Montamos el backend en /workspace/backend
     ports:
-      - "3000:3000"
-   # volumes: 
-   # - ./backend:/app # Montamos el backend en /workspace/backend 
+      - "3000:3000" 
     depends_on:
       - database
     environment:
-     # - MONGO_URI=
-     # - FRONT_URL=
-     # - JWT_SECRET=
-     # - EMAIL_HOST=
-     # - EMAIL_PORT=
-     # - EMAIL_USER=
-     # - EMAIL_PASS=
       - NODE_ENV=development
     env_file:
     - ./backend/.env
     networks:
       - apv_network
-   # command: npm run dev  # O el comando necesario para iniciar tu servidor backend
+
   frontend:
     container_name: apv_frontend
     build:
       context: ./frontend
       dockerfile: Dockerfile
+    #volumes:
+    # - ./frontend:/app/frontend # Montamos el frontend en /workspace/frontend
     ports:
       - "5000:5000"
-   # volumes: 
-    #  - ./frontend:/app # Montamos el frontend en /workspace/frontend
     depends_on:
       - backend
     environment:
-     # - VITE_BACKEND_URL=
       - NODE_ENV=development
-    env_file: 
+    env_file:
       - ./frontend/.env
     networks:
       - apv_network
-   # command: npm run dev  # O el comando necesario para iniciar tu servidor frontend
+
   database:
     container_name: apv_mongodb
     image: mongo:latest
     ports:
       - "27017:27017"
-    networks:
-      - apv_network
     volumes:
       - mongo-data:/data/db
+    networks:
+      - apv_network
 
 volumes:
   mongo-data:
